@@ -1,0 +1,86 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+
+\title{\textbf{A Risk-Efficiency Optimization Framework for Corporate Net-Zero Investment}}
+\author{Jinsu Park}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{The Firm's Optimization Problem}
+
+We posit that a firm $i$ seeks to meet a mandatory abatement target $A^*$ (derived from an external sectoral pathway) by selecting an optimal investment portfolio $P$ from a set of $N$ available low-carbon technologies.
+
+Let $w_j$ be the adoption weight or capacity of technology $j$, where $w_j \in [0, 1]$.
+
+The firm's objective is to \textbf{minimize the total portfolio transition risk ($R_P$)} subject to abatement and budget constraints.
+
+The optimization problem is formulated as:
+
+$$
+\min_{w_j} R_P = \min_{w_j} \left( \sum_{j=1}^N w_j R_j \right)
+$$
+
+Subject to:
+
+\begin{align}
+    \sum_{j=1}^N w_j A_j &\ge A^* \quad && \text{(1. Abatement Constraint)} \\
+    \sum_{j=1}^N w_j I_j &\le B \quad && \text{(2. Budget Constraint)} \\
+    w_j &\ge 0 \quad && \text{(3. Non-negativity)}
+\end{align}
+
+Where:
+\begin{itemize}
+    \item $R_P$: Total portfolio transition risk.
+    \item $R_j$: The composite risk index for technology $j$.
+    \item $A_j$: The total abatement potential of technology $j$ (from MACC analysis).
+    \item $A^*$: The exogenous, required abatement target for the firm.
+    \item $I_j$: The total investment cost (CapEx) for technology $j$ (from MACC analysis).
+    \item $B$: The firm's total available capital budget.
+\end{itemize}
+
+\section{Defining the Composite Risk ($R_j$)}
+
+The core of this model lies in the definition of $R_j$. This is not standard financial volatility. It is a composite index of transition risks, defined as:
+
+$$
+R_j = f(TFR_j, \sigma_{C_j}, SAV_j)
+$$
+
+Where:
+\begin{itemize}
+    \item $TFR_j$: **Technology Failure Risk** (e.g., the technology fails to scale, R\&D failure).
+    \item $\sigma_{C_j}$: **Cost Uncertainty** (e.g., volatility in the abatement cost $C_j$ from the MACC).
+    \item $SAV_j$: **Stranded Asset Value Risk** (e.g., the risk of the new technology itself being stranded by a *newer* technology or policy change).
+\end{itemize}
+
+\subsection{Integration of Real Options Theory}
+
+Crucially, the valuation of $R_j$ incorporates Real Options Theory not as a source of 'opportunity' (upside), but as a \textbf{risk-mitigating factor}.
+
+A technology $j$ with high embedded flexibility (i.e., high option value $O_j$) will have a ceteris paribus lower composite risk $R_j$.
+
+$$
+R_j = \frac{f(TFR_j, \sigma_{C_j}, SAV_j)}{g(O_j)}
+$$
+
+Where $g(O_j)$ is an increasing function of the technology's flexibility (e.g., $O_j$ representing options to defer, abandon, or scale). Thus, flexibility *reduces* the effective risk of an investment, making it more favorable in the optimization.
+
+\section{The Low-Carbon Efficient Frontier}
+
+The solution to the optimization problem (1) yields a single point $(R_P^*, A^*)$: the minimum possible risk for a *given* target $A^*$.
+
+The **Net-Zero Efficient Frontier ($E$)** is the set of all such optimal points, mapping the trade-off between abatement ambition and minimum achievable risk.
+
+$$
+E = \{ (R_P^*(A), A) \mid \forall A \in [0, A_{\max}] \}
+$$
+
+Firms operating on this frontier ($E$) are considered "risk-efficient" in their decarbonization strategy. Firms operating to the right of the frontier are inefficient, as they are taking on excess risk to achieve their abatement goal.
+
+\end{document}
